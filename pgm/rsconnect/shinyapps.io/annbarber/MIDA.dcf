@@ -1,0 +1,12 @@
+name: MIDA
+title: MIDA
+username:
+account: annbarber
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2353171
+bundleId: 3244862
+url: https://annbarber.shinyapps.io/MIDA/
+when: 1591656142.30037
+asMultiple: FALSE
+asStatic: FALSE

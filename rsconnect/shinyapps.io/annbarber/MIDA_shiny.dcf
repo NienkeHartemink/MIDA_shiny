@@ -1,0 +1,13 @@
+name: MIDA_shiny
+title: MIDA_shiny
+username:
+account: annbarber
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3978165
+bundleId: 4480119
+url: https://annbarber.shinyapps.io/MIDA_shiny/
+when: 1618580215.32691
+lastSyncTime: 1618580215.32691
+asMultiple: FALSE
+asStatic: FALSE

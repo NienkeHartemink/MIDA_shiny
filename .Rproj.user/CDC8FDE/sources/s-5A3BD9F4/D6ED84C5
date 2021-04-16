@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1618575786844.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4106980903",
+    "id" : "D6ED84C5",
+    "lastKnownWriteTime" : 1618575215,
+    "last_content_update" : 1618575215,
+    "path" : "M:/Git/MIDA_shiny/pgm/Gillespie.R",
+    "project_path" : "pgm/Gillespie.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

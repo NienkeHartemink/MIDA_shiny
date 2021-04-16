@@ -1,0 +1,173 @@
+# one run
+SIR.stochastic <- function(populations, beta, alpha, timestep){
+  ## First extract the current population sizes from the data frame
+  latest <- tail(populations, 1)
+
+  ## Calculate total size of population
+  pop.size <- latest$Susceptibles + latest$Infecteds + latest$Recovereds
+  #calculate the effective transmission rate
+  effective.beta <- beta * timestep
+  #calculate the effective recovery rate
+  effective.alpha <- alpha * timestep
+
+  #individual transmission probability
+  individual.transmission.prob <- effective.beta * latest$Infecteds/pop.size
+
+
+  if((individual.transmission.prob>=1)||(effective.alpha >=1))
+    stop("Effective recovery rate too high, timestep must be too big")
+
+  #add randomness to make stochastic
+  new.recovereds <- rbinom(1, latest$Infecteds, effective.alpha)
+  new.infecteds <- rbinom(1, latest$Susceptibles, individual.transmission.prob)
+
+  #update populations
+  next.susceptibles <- latest$Susceptibles - new.infecteds
+  next.infecteds <-  latest$Infecteds + new.infecteds - new.recovereds
+  next.recovereds <- latest$Recovereds + new.recovereds
+  next.time <- latest$Time + timestep
+
+  ## Add new row onto populations data frame and return
+  next.populations <- rbind(populations,
+                            data.frame(Time= next.time,
+                                       Susceptibles=next.susceptibles,
+                                       Infecteds=next.infecteds,
+                                       Recovereds=next.recovereds))
+}
+
+plot.populations.SIR.stochastic <- function(populations){
+
+  p <- ggplot(data = populations) +
+    ylab("Number of individuals") +  xlab("Time (days)") +
+    geom_line(aes(x = Time, y = Susceptibles, group = Sim), col = "steelblue4", alpha = .8) +
+    geom_line(aes(x = Time, y = Infecteds, group = Sim), col = "ivory4", alpha = .8) +
+    geom_line(aes(x = Time, y = Recovereds, group = Sim), col = "palegreen3", alpha = .8) +
+    theme_bw() +
+    theme(panel.border = element_blank(), legend.position = "right",
+          panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+          axis.line = element_line(colour = "black"))
+
+  py <- ggplotly(p) %>%
+    layout(legend = list(
+      orientation = "v",
+      x = 0.5, y = -0.4
+    )
+    )
+
+  return(py)
+}
+
+
+
+all_pops <- c()
+for(loop in 1:10){
+  ## Set up initial populations
+  pop.size <- 100
+  initial.infecteds <- 10
+  initial.susceptibles <- pop.size - initial.infecteds
+  initial.recovereds <- 0
+  ## Transmission and recovery rates
+  beta <- .5
+  alpha <- .4
+  ## Simulation times
+  start.time <-0
+  end.time <- 200
+  timestep <- .1
+  ## Set up the initial population sizes and starting time
+  populations <- data.frame(Time= start.time,
+                            Susceptibles = initial.susceptibles,
+                            Infecteds = initial.infecteds,
+                            Recovereds = initial.recovereds
+  )
+
+  current.time <- tail(populations$Time, 1)
+  # Is the experiment over?
+  is.finished <- tail(populations$Infecteds, 1)
+
+  ### Run the simulation
+  while (is.finished > 0 & current.time < end.time ){
+    populations <- SIR.stochastic(populations, beta, alpha, timestep)
+    current.time <- tail(populations$Time, 1)
+    is.finished <- tail(populations$Infecteds, 1)
+  }
+  populations$Sim <- loop
+  populations$Sim <- as.factor(populations$Sim)
+  all_pops <- rbind(all_pops, populations)
+
+}
+plot.populations.SIR.stochastic(all_pops)
+
+
+## average
+plot.populations.SIR.stochastic_average <- function(populations, pop.size){
+
+  p <- ggplot(data = populations) +
+    ylab("Number of individuals") +  xlab("Time (days)") +
+    geom_line(aes(x = Time, y = Susceptibles), col = "steelblue4", alpha = .8) +
+    geom_line(aes(x = Time, y = Infecteds), col = "ivory4", alpha = .8) +
+    geom_line(aes(x = Time, y = Recovereds), col = "palegreen3", alpha = .8) +
+    theme_bw() +
+    theme(panel.border = element_blank(), legend.position = "right",
+          panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+          axis.line = element_line(colour = "black"))
+
+  py <- ggplotly(p) %>%
+    layout(legend = list(
+      orientation = "v",
+      x = 0.5, y = -0.4
+    )
+    )
+
+  return(py)
+}
+
+all_pops <- c()
+for(loop in 1:10){
+  ## Set up initial populations
+  pop.size <- 100
+  initial.infecteds <- 10
+  initial.susceptibles <- pop.size - initial.infecteds
+  initial.recovereds <- 0
+  ## Transmission and recovery rates
+  beta <- .5
+  alpha <- .2
+  ## Simulation times
+  start.time <-0
+  end.time <- 50
+  timestep = 0.1
+  ## Set up the initial population sizes and starting time
+  populations <- data.frame(Time= start.time,
+                            Susceptibles = initial.susceptibles,
+                            Infecteds = initial.infecteds,
+                            Recovereds = initial.recovereds
+  )
+
+  current.time <- tail(populations$Time, 1)
+  # Is the experiment over?
+  is.finished <- tail(populations$Infecteds, 1)
+
+  ### Run the simulation
+  while (is.finished > 0 & current.time < end.time ){
+    populations <- SIR.stochastic(populations, beta, alpha, timestep)
+    current.time <- tail(populations$Time, 1)
+    is.finished <- tail(populations$Infecteds, 1)
+  }
+  if(tail(populations$Time, 1) < end.time){
+    final_pop <- c()
+    final_pop <- data.frame("Time" = seq((tail(populations$Time, 1) + timestep), end.time, timestep))
+    final_pop$Susceptibles <- tail(populations$Susceptibles, 1)
+    final_pop$Infecteds <- tail(populations$Infecteds, 1)
+    final_pop$Recovereds <- tail(populations$Recovereds, 1)
+
+    populations <- rbind(populations, final_pop)
+    }
+   if(loop == 1){
+    all_pops <- populations
+  }else{
+    all_pops <- all_pops + populations
+  }
+}
+average_populations <- all_pops / loop
+plot.populations.SIR.stochastic_average(average_populations)
+
+

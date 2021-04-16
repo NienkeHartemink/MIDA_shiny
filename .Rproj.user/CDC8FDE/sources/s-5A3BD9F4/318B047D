@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1618575792584.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "635796898",
+    "id" : "318B047D",
+    "lastKnownWriteTime" : 1618575209,
+    "last_content_update" : 1618575209,
+    "path" : "M:/Git/MIDA_shiny/pgm/timestep_stochastic.R",
+    "project_path" : "pgm/timestep_stochastic.R",
+    "properties" : {
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
