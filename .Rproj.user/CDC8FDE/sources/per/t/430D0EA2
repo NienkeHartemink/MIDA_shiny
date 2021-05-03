@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1620056260188.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "58|52|83|0|\n85|46|103|0|\n111|59|143|0|\n145|49|163|0|\n171|64|200|0|\n202|48|223|0|\n231|93|270|0|\n272|49|296|0|\n304|52|327|0|\n329|46|344|0|\n353|60|383|0|\n385|47|406|0|\n446|64|491|0|\n494|65|512|0|\n",
+    "hash" : "3775826086",
+    "id" : "430D0EA2",
+    "lastKnownWriteTime" : 1620056885,
+    "last_content_update" : 1620059131720,
+    "path" : "M:/Git/MIDA_shiny/pgm/RenderFunctions.R",
+    "project_path" : "pgm/RenderFunctions.R",
+    "properties" : {
+        "cursorPosition" : "414,0",
+        "scrollLine" : "349"
+    },
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

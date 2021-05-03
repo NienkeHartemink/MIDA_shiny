@@ -33,7 +33,8 @@ ui <- dashboardPage(
       menuItem("SIR Model", tabName = "SIR", icon = icon("stream")),
       menuItem("SIS Model", tabName = "SIS", icon = icon("stream")),
       menuItem("SEIR Model", tabName = "SEIR", icon = icon("stream")),
-      menuItem("Stochastic Models", tabName = "stochastic", icon = icon("stream"))
+      menuItem("Stochastic Models", tabName = "stochastic", icon = icon("stream")),
+      menuItem("Vocabulary", tabName = "vocab", icon = icon("stream"))
     ) # End sidebarMenu
   ), # End dashboardSidebar
   dashboardBody(
@@ -58,17 +59,20 @@ ui <- dashboardPage(
       tabItem(
         tabName = "home",
         fluidRow(
-        column(
-          width = 12,
-          align = "center",
-        HTML("<h2><b>Management of Infections and Diseases in Animal Populations</b></h2>
+          column(
+            width = 12,
+            align = "center",
+            HTML("<h2><b>Management of Infections and Diseases in Animal Populations</b></h2>
              <h3>QVE-30806</h3>"),
-        br(),
-      img(src = "ReaderCover.png", height = "33%", width = "33%")
-        ) # End column
+            br(),
+            img(src = "ReaderCover.png", height = "33%", width = "33%"),
+            br(),
+            br(),
+            HTML("<h4>Application code is available <a href = 'https://github.com/AnnBarber/MIDA_shiny'>here</a> on GitHub</h4>")
+          ) # End column
         ) # End fluidRow
       ), # End tabItem
-
+      
       ###########################################################
       #----------------------------------------------------------
       # 1.0 SIR Model - without vital dynamics (UI)
@@ -94,12 +98,12 @@ ui <- dashboardPage(
                     status = "primary",
                     column(
                       width = 3,
-                      sliderInput("Beta_SIR", "Transmission Rate (\u03B2)", 
+                      sliderInput("Beta_SIR", "Transmission Rate Parameter (\u03B2)", 
                                   min = 0, max = 2, value = .5, step = .01)
                     ), # End column 
                     column(
                       width = 3,
-                      sliderInput("alpha_SIR", "Recovery Rate (\u03B1)", 
+                      sliderInput("alpha_SIR", "Recovery Rate Parameter (\u03B1)", 
                                   min = 0, max = 2, value = .2, step = .01)
                     ), # End column
                     column(
@@ -157,17 +161,17 @@ ui <- dashboardPage(
                     fluidRow(
                       column(
                         width = 3,
-                        sliderInput("Beta_SIR.vd", "Transmission Rate (\u03B2)", 
+                        sliderInput("Beta_SIR.vd", "Transmission Rate Parameter (\u03B2)", 
                                     min = 0, max = 2, value = .5, step = .01)
                       ), # End column
                       column(
                         width = 3,
-                        sliderInput("alpha_SIR.vd", "Recovery Rate (\u03B1)", 
+                        sliderInput("alpha_SIR.vd", "Recovery Rate Parameter (\u03B1)", 
                                     min = 0, max = 2, value = .2, step = .01)
                       ), # End column
                       column(
                         width = 2,
-                        numericInput("Mu_SIR.vd", "Birth and Death Rate (\u03BC)", 
+                        numericInput("Mu_SIR.vd", "Birth and Death Rate Parameter (\u03BC)", 
                                      value = 0.02, width = "100%")
                       ), # End column
                       column(
@@ -182,7 +186,7 @@ ui <- dashboardPage(
                       ) # End column
                     ) # End fluidRow
                   ) # End Box
-                ), # End column
+                ), # End fluidRow
                 fluidRow(
                   column(
                     width = 6,
@@ -192,7 +196,7 @@ ui <- dashboardPage(
                       status = "primary",
                       width = 12,
                       collapsible = F,
-                      withSpinner(htmlOutput("text_SIR.vd")),
+                      withSpinner(htmlOutput("text_SIR.vd"))
                     ) # End box
                   ), # End column
                   column(
@@ -223,7 +227,7 @@ ui <- dashboardPage(
                 fluidRow(
                   column(
                     width = 4,
-                    sliderInput("alpha_SIR.s", "Recovery Rate (\u03B1)", 
+                    sliderInput("alpha_SIR.s", "Recovery Rate Parameter (\u03B1)", 
                                 min = 0, max = 2, value = .2, step = .01)
                   ), # End column
                   column(
@@ -235,7 +239,7 @@ ui <- dashboardPage(
                     width = 4,
                     numericInput("popSize_SIR.s", "Population Size (N)",
                                  value = 100, width = "100%")
-                  ), # End column
+                  ) # End column
                 ), # End fluidRow
                 fluidRow(
                   column(
@@ -293,7 +297,7 @@ ui <- dashboardPage(
                 fluidRow(
                   column(
                     width = 4,
-                    sliderInput("alpha_SIR.si", "Recovery Rate (\u03B1)", 
+                    sliderInput("alpha_SIR.si", "Recovery Rate Parameter (\u03B1)", 
                                 min = 0, max = 2, value = .2, step = .01)
                   ), # End column
                   column(
@@ -360,7 +364,7 @@ ui <- dashboardPage(
               ) # End Box
             ) # End fluidRow
           ) # End tabPanel
-        ) # End tabsetPanel
+        )  # End tabsetPanel
       ), # End tabItem
       
       ###########################################################
@@ -382,12 +386,12 @@ ui <- dashboardPage(
             fluidRow(
               column(
                 width = 3,
-                sliderInput("Beta_SIS", "Transmission Rate (\u03B2)", 
+                sliderInput("Beta_SIS", "Transmission Rate Parameter (\u03B2)", 
                             min = 0, max = 2, value = .5, step = .01)
               ), # End column
               column(
                 width = 3,
-                sliderInput("alpha_SIS", "Recovery Rate (\u03B1)", 
+                sliderInput("alpha_SIS", "Recovery Rate Parameter (\u03B1)", 
                             min = 0, max = 2, value = .2, step = .01)
               ), # End column
               column(
@@ -440,12 +444,12 @@ ui <- dashboardPage(
             fluidRow(
               column(
                 width = 2,
-                sliderInput("Beta_SEIR", "Transmission Rate (\u03B2)", 
+                sliderInput("Beta_SEIR", "Transmission Rate Parameter (\u03B2)", 
                             min = 0, max = 2, value = .5, step = .01)
               ), # End column
               column(
                 width = 2,
-                sliderInput("alpha_SEIR", "Recovery Rate (\u03B1)", 
+                sliderInput("alpha_SEIR", "Recovery Rate Parameter (\u03B1)", 
                             min = 0, max = 2, value = .2, step = .01)
               ), # End column
               column(
@@ -508,12 +512,12 @@ ui <- dashboardPage(
               ), # End column
               column(
                 width = 4,
-                sliderInput("Beta_stochastic", "Transmission Rate (\u03B2)", 
+                sliderInput("Beta_stochastic", "Transmission Rate Parameter (\u03B2)", 
                             min = 0, max = 2, value = .5, step = .01)
               ), # End column
               column(
                 width = 4,
-                sliderInput("alpha_stochastic", "Recovery Rate (\u03B1)", 
+                sliderInput("alpha_stochastic", "Recovery Rate Parameter (\u03B1)", 
                             min = 0, max = 2, value = .2, step = .01)
               ) # End column
             ), # End fluidRow
@@ -562,7 +566,46 @@ ui <- dashboardPage(
             ) # End fluidRow
           ) # End box
         ) # End fluidRow
-      ) # End tabItem
+      ), # End tabItem
+      
+      ###########################################################
+      #----------------------------------------------------------
+      # 5.0 Glossary (UI)
+      #----------------------------------------------------------
+      ###########################################################
+      
+      tabItem(
+        tabName = "vocab",
+         fluidRow(
+        valueBox("S", "Number of susceptible individuals", color = "navy"), 
+        valueBox("I", "Number of infected individuals", color = "blue"),
+        valueBox("E", "Number of exposed individuals", color = "navy")
+        ), # End fluidRow
+        fluidRow(
+        valueBox("R", "Number of recovered individuals", color = "blue"),
+        valueBox("N", "Total population size", color = "navy"),
+        valueBox("s", "Proportion susceptible", color = "blue")
+        ), # End fluidRow
+        fluidRow(
+        valueBox(HTML("R<sub>0</sub>"), "Basic reproduction ratio", color = "navy"),
+        valueBox(HTML("R<sub>e</sub>"), "Effective reproduction ratio", color = "blue"),
+        valueBox("\u03B2", "Transmission rate parameter", color = "navy")
+        ), # End fluidRow
+        fluidRow(
+        valueBox("\u03B1", "Recovery rate parameter", color = "blue"),
+        valueBox("\u03BC", "Birth/death rate parameter for a stable population", color = "navy"),
+        valueBox("\u03C3", "Rate at which individuals move from the exposed to infectious state (i.e. 1/latent period)", color = "blue")
+        ), # End fluidRow
+        fluidRow(
+        valueBox("c", "Contact rate", color = "navy"),
+        valueBox(HTML("p<sub>i</sub>"), "Fraction of individuals with susceptibility of type i (where i = Low or High susceptibility)", color = "blue"),
+        valueBox(HTML("q<sub>i</sub>"), "Fraction of individuals with infectivity of type i (where i = Low or High infectivity)", color = "navy")
+        ), # End fluidRow
+        fluidRow(
+        valueBox(HTML("g<sub>i</sub>"), "Susceptibility value for individuals with susceptibility of type i (where i = Low or High susceptibility)", color = "blue"),
+        valueBox(HTML("f<sub>i</sub>"), "Infectivity value for individuals with infectivity of type i (where i = Low or High infectivity)", color = "navy")
+        ) # End fluidRow
+      ) # End tab item
     ) # End tabItems
   ) # End dashboardBody
 ) # End dashboardPage
@@ -615,7 +658,7 @@ server <- function(input, output){
       current.time <- tail(populations$Time, 1)}
     
     plot.populations.SIR(populations)
-
+    
   })
   
   output$text_SIR <- renderText({
@@ -624,9 +667,9 @@ server <- function(input, output){
          <h5>dI/dt = \u03B2SI/N -\u03B1I</h5>
          <h5>dR/dt = \u03B1I</h5>
          <br>
-         <h4>The Basic Reproduction Number (R<sub>0</sub>)</h4>
-   <h5> R<sub>0</sub> is a function of the transmission rate (\u03B2) and
-          the recovery rate (\u03B1) </h5>
+         <h4>The Basic Reproduction Ratio (R<sub>0</sub>)</h4>
+   <h5> R<sub>0</sub> is a function of the transmission rate parameter (\u03B2) and
+          the recovery rate parameter (\u03B1) </h5>
           <h5>Check out how R<sub>0</sub> changes as you modify \u03B2 & \u03B1</h5>
          <h5>R<sub>0</sub> =  \u03B2 / \u03B1 = ", 
          input$Beta_SIR / input$alpha_SIR)
@@ -675,9 +718,9 @@ server <- function(input, output){
     <h5>dS/dt = \u03BCN -\u03B2SI/N -\u03BCS</h5>
          <h5>dI/dt = \u03B2SI/N -\u03B1I -\u03BCI</h5>
          <h5>dR/dt = \u03B1I -\u03BCR</h5>
-         <h6>Where \u03BC is the birth and death rate for a stable population </h6>
+         <h6>Where \u03BC is the birth and death rate parameter for a stable population </h6>
          <br>
-         <h4>The Basic Reproduction Number (R<sub>0</sub>) & The Effective Reproduction Number (R<sub>e</sub>)</h4>
+         <h4>The Basic Reproduction Ratio (R<sub>0</sub>) & The Effective Reproduction Ratio (R<sub>e</sub>)</h4>
    <h5>R<sub>0</sub> =  \u03B2 / \u03B1+\u03BC = ", 
          round(input$Beta_SIR.vd / (input$alpha_SIR.vd + input$Mu_SIR.vd), digits = 3), "</h5>",
          "<h5>At the endemic equilibrium the proportion susceptible, (s),
@@ -737,10 +780,11 @@ server <- function(input, output){
          <h5>dR/dt = \u03B1I</h5>
          <h6>Where L is low susceptibility and H is high susceptibility</h6>
          <br>
-         <h4>The Effective Reproduction Number (R<sub>e</sub>)</h4>
-   <h5> R<sub>e</sub> = p<sub>L</sub>\u03B2<sub>L</sub>+p<sub>H</sub>\u03B2<sub>H</sub> / \u03B1 = ",
+         <h4>The Effective Reproduction Ratio (R<sub>e</sub>)</h4>
+   <h5>R<sub>e</sub> = p<sub>L</sub>\u03B2<sub>L</sub>+p<sub>H</sub>\u03B2<sub>H</sub> / \u03B1 = ",
          ((input$fracLsus.s * (input$contactRate_SIR.s * input$SusLvalue.s)) +
-            (((1 - input$fracLsus.s) * input$contactRate_SIR.s) / input$alpha_SIR.s)), "</h5>")
+            (((1 - input$fracLsus.s) * input$contactRate_SIR.s) / input$alpha_SIR.s)), "</h5>
+         <h6>Where \u03B2<sub>i</sub> = c x g<sub>i</sub></h6>")
   })
   
   ##############################################################################
@@ -793,7 +837,7 @@ server <- function(input, output){
     # run the simulation
     while (current.time < end.time){
       populations <- SIR.si(populations, beta.LL, beta.HH,
-                              beta.LH, beta.HL, qL, qH, alpha, timestep)
+                            beta.LH, beta.HL, qL, qH, alpha, timestep)
       current.time <- tail(populations$Time, 1)}
     
     plot.populations.SIR.si(populations)
@@ -810,7 +854,7 @@ server <- function(input, output){
     <h5>dR/dt = \u03B1I<sub>L</sub> + \u03B1I<sub>H</sub></h5>
          <h6>Where L is low susceptibility/infectivity and H is high susceptibility/infectivity</h6>
          <br>
-         <h4>The Effective Reproduction Number (R<sub>e</sub>)</h4>
+         <h4>The Effective Reproduction Ratio (R<sub>e</sub>)</h4>
          <h5>R<sub>e</sub> = c\u2211<sub>i</sub> p<sub>i</sub>g<sub>i</sub>
            (\u2211<sub>j</sub> q<sub>j</sub>f<sub>j</sub>) / \u03B1 = ",
          ((input$contactRate_SIR.si * input$fracLsus.si * input$SusLvalue.si * input$fracLinf.si * input$InfLvalue.si)+
@@ -861,9 +905,9 @@ server <- function(input, output){
     <h5>dS/dt = -\u03B2SI/N + \u03B1I</h5>
          <h5>dI/dt = \u03B2SI/N -\u03B1I</h5>
          <br>
-         <h4>The Basic Reproduction Number (R<sub>0</sub>)</h4>
-   <h5>R<sub>0</sub> is a function of the transmission rate (\u03B2) and
-          the recovery rate (\u03B1) </h5>
+         <h4>The Basic Reproduction Ratio (R<sub>0</sub>)</h4>
+   <h5>R<sub>0</sub> is a function of the transmission rate parameter (\u03B2) and
+          the recovery rate parameter (\u03B1) </h5>
           <h5>Check out how R<sub>0</sub> changes as you modify \u03B2 & \u03B1</h5>
          <h5>R<sub>0</sub> =  \u03B2 / \u03B1 = ", 
          input$Beta_SIS / input$alpha_SIS)
@@ -918,9 +962,9 @@ server <- function(input, output){
          <h5>dR/dt = \u03B1I</h5>
          <h6>Where \u03C3 is the rate at which individuals move from the latent phase to the infectious phase (i.e. 1/latent period)</h6>
          <br>
-         <h4>The Basic Reproduction Number (R<sub>0</sub>)</h4>
-   <h5> R<sub>0</sub> is a function of the transmission rate (\u03B2) and
-          the recovery rate (\u03B1) </h5>
+         <h4>The Basic Reproduction Ratio (R<sub>0</sub>)</h4>
+   <h5> R<sub>0</sub> is a function of the transmission rate parameter (\u03B2) and
+          the recovery rate parameter (\u03B1) </h5>
           <h5>Check out how R<sub>0</sub> changes as you modify \u03B2 & \u03B1</h5>
          <h5>R<sub>0</sub> =  \u03B2 / \u03B1 = ", 
          input$Beta_SEIR / input$alpha_SEIR)
@@ -980,11 +1024,7 @@ server <- function(input, output){
     
     plot.populations.SIR.stochastic(all_pops, Nsims)
   })
-  
-  output$text_stochastic <- renderText({
-    HTML("<h4>Stochastic text....</h4>")
-  })
-  
+
   output$stochastic_model_average <- renderPlotly({
     
     # number of simulations to run
@@ -1033,7 +1073,7 @@ server <- function(input, output){
         final_pop$Susceptibles <- tail(populations$Susceptibles, 1)
         final_pop$Infecteds <- tail(populations$Infecteds, 1)
         final_pop$Recovereds <- tail(populations$Recovereds, 1)
- populations <- rbind(populations, final_pop)
+        populations <- rbind(populations, final_pop)
       }
       
       if(loop == 1){
