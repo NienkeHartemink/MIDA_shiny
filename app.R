@@ -662,7 +662,7 @@ server <- function(input, output){
   })
   
   output$text_SIR <- renderText({
-    HTML("<h4>SIR Ordinary Diffrential Equations (ODEs) for a closed population</h4>
+    HTML("<h4>SIR Ordinary Differential Equations (ODEs) for a closed population</h4>
     <h5>dS/dt = -\u03B2SI/N</h5>
          <h5>dI/dt = \u03B2SI/N -\u03B1I</h5>
          <h5>dR/dt = \u03B1I</h5>
@@ -714,7 +714,7 @@ server <- function(input, output){
   })
   
   output$text_SIR.vd <- renderText({
-    HTML("<h4>SIR Ordinary Diffrential Equations (ODEs) for an open population</h4>
+    HTML("<h4>SIR Ordinary Differential Equations (ODEs) for an open population</h4>
     <h5>dS/dt = \u03BCN -\u03B2SI/N -\u03BCS</h5>
          <h5>dI/dt = \u03B2SI/N -\u03B1I -\u03BCI</h5>
          <h5>dR/dt = \u03B1I -\u03BCR</h5>
@@ -773,7 +773,7 @@ server <- function(input, output){
   })
   
   output$text_SIR.s <- renderText({
-    HTML("<h4>SIR Ordinary Diffrential Equations (ODEs) with heterogeneity in susceptibility</h4>
+    HTML("<h4>SIR Ordinary Differential Equations (ODEs) with heterogeneity in susceptibility</h4>
     <h5>dS<sub>L</sub>/dt = -\u03B2<sub>L</sub>S<sub>L</sub>I/N</h5>
     <h5>dS<sub>H</sub>/dt = -\u03B2<sub>H</sub>S<sub>H</sub>I/N</h5>
          <h5>dI/dt = \u03B2<sub>L</sub>S<sub>L</sub>I/N + \u03B2<sub>H</sub>S<sub>H</sub>I/N -\u03B1I</h5>
@@ -844,7 +844,7 @@ server <- function(input, output){
   })
   
   output$text_SIR.si <- renderText({
-    HTML("<h4>SIR Ordinary Diffrential Equations (ODEs) with heterogeneity in susceptibility & infectivity</h4>
+    HTML("<h4>SIR Ordinary Differential Equations (ODEs) with heterogeneity in susceptibility & infectivity</h4>
     <h5>dS<sub>L</sub>/dt = -(\u03B2<sub>LL</sub>S<sub>L</sub>I<sub>L</sub>/N + \u03B2<sub>LH</sub>S<sub>L</sub>I<sub>H</sub>/N)</h5>
     <h5>dS<sub>H</sub>/dt = -(\u03B2<sub>HH</sub>S<sub>H</sub>I<sub>H</sub>/N + \u03B2<sub>HL</sub>S<sub>H</sub>I<sub>L</sub>/N)</h5>
     <h5>dI<sub>L</sub>/dt = q<sub>L</sub>(\u03B2<sub>LL</sub>S<sub>L</sub>I<sub>L</sub>/N + \u03B2<sub>LH</sub>S<sub>L</sub>I<sub>H</sub>/N) +
@@ -901,7 +901,7 @@ server <- function(input, output){
   })
   
   output$text_SIS <- renderText({
-    HTML("<h4>SIS Ordinary Diffrential Equations (ODEs) for a closed population</h4>
+    HTML("<h4>SIS Ordinary Differential Equations (ODEs) for a closed population</h4>
     <h5>dS/dt = -\u03B2SI/N + \u03B1I</h5>
          <h5>dI/dt = \u03B2SI/N -\u03B1I</h5>
          <br>
@@ -955,7 +955,7 @@ server <- function(input, output){
   })
   
   output$text_SEIR <- renderText({
-    HTML("<h4>SEIR Ordinary Diffrential Equations (ODEs) for a closed population</h4>
+    HTML("<h4>SEIR Ordinary Differential Equations (ODEs) for a closed population</h4>
     <h5>dS/dt = -\u03B2SI/N</h5>
     <h5>dE/dt = \u03B2SI/N -\u03C3E</h5>
          <h5>dI/dt = \u03C3E -\u03B1I</h5>
